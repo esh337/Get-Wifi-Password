@@ -1,0 +1,1 @@
+$ssid=(netsh wlan show interfaces | Select-String '^\s*SSID' | Select-Object -First 1).ToString().Split(':')[1].Trim(); $key=(netsh wlan show profile name="$ssid" key=clear | Select-String 'Key Content'); if ($key) { $pwd=$key.ToString().Split(':')[1].Trim(); Write-Host "`nWi-Fi: $ssid`nPassword: $pwd" } else { Write-Host "something wrong." }
